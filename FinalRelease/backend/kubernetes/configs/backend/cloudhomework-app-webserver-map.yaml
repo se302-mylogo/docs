@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudhomework-app-webserver-map
+data:
+  nginx.conf: |
+    user  nginx;
+    worker_processes  1;
+
+    error_log  /var/log/nginx/error.log warn;
+    pid        /var/run/nginx.pid;
+
+    events {
+        worker_connections  2048;
+        use epoll;
+    }
+
+    http {
+        include       /etc/nginx/mime.types;
+        default_type  application/octet-stream;
+        sendfile        on;
+        tcp_nopush         on;
+        tcp_nodelay        on;
+        keepalive_timeout  65;
+
+        upstream djangoapp {
+            server 127.0.0.1:8080;
+        }
+
+        server {
+            listen 80;
+
+            location / {
+                proxy_pass         http://djangoapp;
+                proxy_redirect     off;
+                proxy_set_header Host $host;
+            }
+            location /static {
+                autoindex on;
+                alias /usr/share/nginx/html;
+            }
+        }
+    }
+
+

@@ -1,0 +1,89 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media-storage
+spec:
+  storageClassName: managed-nfs-storage
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudhomework-backend-deployment
+spec:
+  selector:
+    matchLabels:
+      app: cloudhomework-backend
+  minReadySeconds: 5
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: cloudhomework-backend
+    spec:
+      initContainers:
+        - name: migrate
+          image: fourstring/cloudhomework-backend
+          imagePullPolicy: Always
+          env:
+            - name: DJANGO_ENVIRON_SETTINGS
+              value: CLUSTER
+          command: ["python","manage.py","migrate"]
+          volumeMounts:
+            - name: environ-settings
+              mountPath: /home/cloudhomework/cloudhomework_backend/environ_settings
+        - name: collectstatic
+          image: fourstring/cloudhomework-backend
+          imagePullPolicy: Always
+          env:
+            - name: DJANGO_ENVIRON_SETTINGS
+              value: CLUSTER
+          command: ["python","manage.py","collectstatic"]
+          volumeMounts:
+            - name: environ-settings
+              mountPath: /home/cloudhomework/cloudhomework_backend/environ_settings
+            - name: static-files
+              mountPath: /home/cloudhomework/static
+      containers:
+        - name: cloudhomework-backend
+          image: fourstring/cloudhomework-backend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DJANGO_ENVIRON_SETTINGS
+              value: CLUSTER
+          volumeMounts:
+            - name: environ-settings
+              mountPath: /home/cloudhomework/cloudhomework_backend/environ_settings
+            - name: uploaded-files
+              mountPath: /home/cloudhomework/cloudhomework_backend/medias
+        - name: app-webserver
+          image: nginx
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: static-files
+              mountPath: /usr/share/nginx/html
+            - name: webserver-configmap
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+      volumes:
+        - name: environ-settings
+          configMap:
+            name: environ-settings-map
+            items:
+              - key: cluster_settings.py
+                path: cluster_settings.py
+        - name: static-files
+          emptyDir: {}
+        - name: webserver-configmap
+          configMap:
+            name: cloudhomework-app-webserver-map
+        - name: uploaded-files
+          persistentVolumeClaim:
+            claimName: media-storage

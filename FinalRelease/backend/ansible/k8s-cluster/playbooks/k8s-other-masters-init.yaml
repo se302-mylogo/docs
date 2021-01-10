@@ -1,0 +1,34 @@
+- hosts: masters:!master_origin
+  become: true
+  vars:
+    user: admin
+  tasks:
+    - name: Create Kubernetes pki dir
+      file:
+        path: /etc/kubernetes/pki/etcd
+        state: directory
+    - name: "Push Kubernetes Master PKI files to master replicas"
+      copy:
+        src: /tmp/kubeadm-ha/
+        dest: /etc/kubernetes/
+        owner: root
+        group: root
+        mode: preserve
+
+    - name: Generate master join token
+      shell: kubeadm token create --print-join-command
+      register: kubeadm_join_cmd
+      delegate_to: "{{groups['master_origin'][0]}}"
+
+    - set_fact:
+        kubeadm_join: "{{ kubeadm_join_cmd.stdout }}"
+
+    - name: Join Master replicas to cluster
+      shell: "{{ kubeadm_join }} --control-plane"
+
+    - name: Setup kubeconfig for ssh user
+      command: "{{ item }}"
+      with_items:
+        - mkdir -p /home/{{ user }}/.kube
+        - cp /etc/kubernetes/admin.conf /home/{{ user }}/.kube/config
+        - chown {{ user }}:{{ user }} /home/{{ user }}/.kube/config

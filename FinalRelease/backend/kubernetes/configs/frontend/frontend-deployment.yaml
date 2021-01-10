@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: url-shortener-frontend-deployment
+spec:
+  selector:
+    matchLabels:
+      app: url-shortener-frontend
+  minReadySeconds: 5
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: url-shortener-frontend
+    spec:
+      containers:
+        - name: url-shortener-frontend
+          image: fourstring/url-shortener-frontend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: webserver-logs
+              mountPath: /var/log/nginx
+            - name: webserver-configmap
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+      volumes:
+        - name: webserver-configmap
+          configMap:
+            name: frontend-webserver-map
+        - name: webserver-logs
+          emptyDir: {}

@@ -1,0 +1,19 @@
+- hosts: workers
+  become: True
+  vars:
+    MYSQL_ROOT_PASSWORD: fourstring
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+    - name: Install mariadb
+      apt:
+        name: "{{ packages }}"
+        state: present
+        update_cache: yes
+      vars:
+        packages:
+          - mariadb-server
+          - rsync
+          - python3-pymysql
+
+    - name: Set MySQL root password
+      shell: mysql -uroot -e "set password=password('{{ MYSQL_ROOT_PASSWORD }}');FLUSH PRIVILEGES;"

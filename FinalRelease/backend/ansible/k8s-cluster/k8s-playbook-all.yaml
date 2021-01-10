@@ -1,0 +1,5 @@
+- import_playbook: playbooks/k8s-packages-init.yaml
+- import_playbook: playbooks/k8s-master0-init.yaml
+- import_playbook: playbooks/k8s-other-masters-init.yaml
+- import_playbook: playbooks/k8s-workers-init.yaml
+- import_playbook: playbooks/k8s-nfs-server-init.yaml

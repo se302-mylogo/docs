@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redirector-service
+spec:
+  selector:
+    app: redirector
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

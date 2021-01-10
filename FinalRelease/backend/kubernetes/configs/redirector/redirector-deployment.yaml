@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redirector-deployment
+spec:
+  selector:
+    matchLabels:
+      app: redirector
+  minReadySeconds: 5
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: redirector
+    spec:
+      containers:
+        - name: redirector
+          image: fourstring/redirector
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: ENVIRON_SETTINGS
+              value: CLUSTER
+          volumeMounts:
+            - name: redirector-logs
+              mountPath: /var/log/redirector
+        - name: filebeat
+          image: docker.elastic.co/beats/filebeat:7.9.1
+          volumeMounts:
+            - name: filebeat-config
+              mountPath: /usr/share/filebeat/filebeat.yml
+              subPath: filebeat.yml
+            - name: redirector-logs
+              mountPath: /var/log/redirector
+      volumes:
+        - name: redirector-logs
+          emptyDir: {}
+        - name: filebeat-config
+          configMap:
+            name: redirector-filebeat-cm
+            items:
+              - key: filebeat.yml
+                path: filebeat.yml

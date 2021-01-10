@@ -1,0 +1,21 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: url-shortener-backend-runner
+spec:
+  replicas: 3
+  template:
+    spec:
+      repository: fourstring/url-shortener-backend
+      env: []
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: url-shortener-frontend-runner
+spec:
+  replicas: 3
+  template:
+    spec:
+      repository: fourstring/url-shortener-frontend
+      env: []

@@ -1,0 +1,75 @@
+- hosts: master_origin
+  become: true
+  vars:
+    master_origin_ip: '172.26.13.108'
+    APISERVER_LB_PORT: 8443
+    APISERVER_LISTEN_PORT: 6443
+    control_plane_hosts:
+      - '172.26.13.108'
+    user: admin
+  tasks:
+    - name: Create haproxy dir
+      file:
+        path: /etc/haproxy
+        state: directory
+    - name: Transfer templated haproxy configuration to host
+      template:
+        src: control-haproxy-cfg.j2
+        dest: /etc/haproxy/haproxy.cfg
+    - name: Transfer templated haproxy static pod configuration to host
+      template:
+        src: control-haproxy-pod.j2
+        dest: /etc/kubernetes/manifests/haproxy.yaml
+    - name: Initialize the Kubernetes cluster using kubeadm
+      command: kubeadm init --control-plane-endpoint "{{ master_origin_ip }}:{{ APISERVER_LB_PORT }}" --upload-certs --pod-network-cidr=192.168.0.0/16
+    - name: Setup kubeconfig for ssh user
+      command: "{{ item }}"
+      with_items:
+        - mkdir -p /home/{{ user }}/.kube
+        - cp /etc/kubernetes/admin.conf /home/{{ user }}/.kube/config
+        - chown {{ user }}:{{ user }} /home/{{ user }}/.kube/config
+
+    - name: "Fetching Kubernetes Master PKI files from primary master"
+      fetch:
+        src: /etc/kubernetes/pki/{{item}}
+        dest: /tmp/kubeadm-ha/pki/{{item}}
+        flat: yes
+      with_items:
+        - ca.crt
+        - ca.key
+        - sa.key
+        - sa.pub
+        - front-proxy-ca.crt
+        - front-proxy-ca.key
+
+    - name: "Fetching Kubernetes Master ETCD files from primary master"
+      fetch:
+        src: /etc/kubernetes/pki/etcd/{{item}}
+        dest: /tmp/kubeadm-ha/pki/etcd/{{item}}
+        flat: yes
+      with_items:
+        - ca.crt
+        - ca.key
+
+    - name: "Fetching Kubernetes Master Admin files from primary master"
+      fetch:
+        src: /etc/kubernetes/{{item}}
+        dest: /tmp/kubeadm-ha/{{item}}
+        flat: yes
+      with_items:
+        - admin.conf
+
+    - name: Install the Tigera Calico operator and custom resource definitions
+      become: false
+      command: kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+    
+    - name: Install Calico by creating the necessary custom resource
+      become: false
+      command: kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
+
+    - name: Generate join command
+      command: kubeadm token create --print-join-command
+      register: join_command
+
+    - name: Copy join command to local file
+      local_action: copy content="{{ join_command.stdout_lines[0] }}" dest="./join-command"

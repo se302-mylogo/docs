@@ -1,0 +1,24 @@
+apiVersion: databases.spotahome.com/v1
+kind: RedisFailover
+metadata:
+  name: redis-cluster
+spec:
+  sentinel:
+    replicas: 3
+  redis:
+    replicas: 6
+    customConfig:
+      - "tcp-keepalive 0"
+      - "timeout 60"
+    storage:
+      keepAfterDeletion: true
+      persistentVolumeClaim:
+        metadata:
+          name: redis-persistent-data
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 4Gi
+          storageClassName: managed-nfs-storage

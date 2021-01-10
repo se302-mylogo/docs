@@ -1,0 +1,13 @@
+all:
+  children:
+    workers:
+      hosts:
+        '35.221.215.41':
+          ansible_user: fourstring
+          ansible_ssh_private_key_file: k8s-cluster.key
+        '104.199.236.255':
+          ansible_user: fourstring
+          ansible_ssh_private_key_file: k8s-cluster.key
+        '104.155.233.103':
+          ansible_user: fourstring
+          ansible_ssh_private_key_file: k8s-cluster.key

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: digitalocean-dns
+  namespace: cert-manager
+data:
+  access-token: "NjJjZWQ4OGIxNDc1NTM0MGNkZTI1YjFkYWQ5MTgyM2M2ZGMwZmU3NTNjOWNkNDVkNzdiYWNiZDFjZmFiMjNmNQ=="

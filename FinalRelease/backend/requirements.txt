@@ -1,0 +1,14 @@
+django
+djangorestframework
+drf-dynamic-fields
+djangorestframework-simplejwt
+redis
+ipython
+django-cors-headers
+coverage
+djangorestframework-camel-case
+uwsgi
+psycopg2
+httpx
+djangorestframework-filters==1.0.0.dev0
+drf-nested-routers

@@ -1,0 +1,7 @@
+- hosts: workers
+  become: true
+  tasks:
+    - name: Transfer galera.cnf to hosts
+      template:
+        src: galera.cnf
+        dest: /etc/mysql/conf.d/galera.cnf

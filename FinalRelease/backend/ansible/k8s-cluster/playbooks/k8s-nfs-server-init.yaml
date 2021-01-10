@@ -1,0 +1,39 @@
+- hosts: master_origin
+  become: true
+  tasks:
+    - name: Install nfs server
+      apt:
+        name: "nfs-kernel-server"
+        state: present
+        update_cache: yes
+
+    - name: Create nfs user and group
+      user:
+        name: nfsnobody
+        state: present
+        shell: /sbin/nologin
+        create_home: no
+      register: nfs_user
+
+    - name: Create nfs directory
+      file:
+        path: /srv/k8s
+        state: directory
+        owner: nfsnobody
+        group: nfsnobody
+
+    - name: Create exportfs entry
+      lineinfile:
+        path: /etc/exports
+        line: "/srv/k8s 172.105.213.148(rw,sync,anonuid={{ nfs_user.uid }},anongid={{ nfs_user.group }}) 103.29.68.66(rw,sync,anonuid={{ nfs_user.uid }},anongid={{ nfs_user.group }}) 139.162.106.159(rw,sync,anonuid={{ nfs_user.uid }},anongid={{ nfs_user.group }})"
+      notify:
+        - nfs service start
+
+    - name: Exportfs
+      command: exportfs -rav
+
+  handlers:
+    - name: nfs service start
+      service:
+        name: nfs-server
+        state: restarted

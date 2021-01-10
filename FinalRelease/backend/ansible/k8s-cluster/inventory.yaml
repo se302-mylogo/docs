@@ -1,0 +1,20 @@
+all:
+  children:
+    master_origin:
+      hosts:
+        '172.105.213.148':
+          ansible_user: root
+          ansible_ssh_pass: RHErZjvfnGyPRfa5WInvb7oaGXQHIG
+    masters:
+      hosts:
+        '172.105.213.148':
+          ansible_user: root
+          ansible_ssh_pass: RHErZjvfnGyPRfa5WInvb7oaGXQHIG
+    workers:
+      hosts:
+        '103.29.68.66':
+          ansible_user: root
+          ansible_ssh_pass: RHErZjvfnGyPRfa5WInvb7oaGXQHIG
+        '139.162.106.159':
+          ansible_user: root
+          ansible_ssh_pass: RHErZjvfnGyPRfa5WInvb7oaGXQHIG

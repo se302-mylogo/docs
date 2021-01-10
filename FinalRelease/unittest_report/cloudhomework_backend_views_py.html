@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+    <title>Coverage for cloudhomework_backend/views.py: 92%</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.hotkeys.js"></script>
+    <script type="text/javascript" src="jquery.isonscreen.js"></script>
+    <script type="text/javascript" src="coverage_html.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(coverage.pyfile_ready);
+    </script>
+</head>
+<body class="pyfile">
+<div id="header">
+    <div class="content">
+        <h1>Coverage for <b>cloudhomework_backend/views.py</b> :
+            <span class="pc_cov">92%</span>
+        </h1>
+        <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
+        <h2 class="stats">
+            38 statements &nbsp;
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">35 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">3 missing</button>
+            <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">0 excluded</button>
+        </h2>
+    </div>
+</div>
+<div class="help_panel">
+    <img id="panel_icon" src="keybd_open.png" alt="Hide keyboard shortcuts" />
+    <p class="legend">Hot-keys on this page</p>
+    <div>
+    <p class="keyhelp">
+        <span class="key">r</span>
+        <span class="key">m</span>
+        <span class="key">x</span>
+        <span class="key">p</span> &nbsp; toggle line displays
+    </p>
+    <p class="keyhelp">
+        <span class="key">j</span>
+        <span class="key">k</span> &nbsp; next/prev highlighted chunk
+    </p>
+    <p class="keyhelp">
+        <span class="key">0</span> &nbsp; (zero) top of page
+    </p>
+    <p class="keyhelp">
+        <span class="key">1</span> &nbsp; (one) first highlighted chunk
+    </p>
+    </div>
+</div>
+<div id="source">
+    <p id="t1" class="run"><span class="n"><a href="#t1">1</a></span><span class="t"><span class="key">from</span> <span class="nam">django</span><span class="op">.</span><span class="nam">http</span> <span class="key">import</span> <span class="nam">Http404</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t2" class="run"><span class="n"><a href="#t2">2</a></span><span class="t"><span class="key">from</span> <span class="nam">rest_framework</span><span class="op">.</span><span class="nam">response</span> <span class="key">import</span> <span class="nam">Response</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t3" class="run"><span class="n"><a href="#t3">3</a></span><span class="t"><span class="key">from</span> <span class="nam">rest_framework</span><span class="op">.</span><span class="nam">viewsets</span> <span class="key">import</span> <span class="nam">ViewSet</span><span class="op">,</span> <span class="nam">GenericViewSet</span><span class="op">,</span> <span class="nam">ModelViewSet</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t4" class="run"><span class="n"><a href="#t4">4</a></span><span class="t"><span class="key">from</span> <span class="nam">rest_framework</span><span class="op">.</span><span class="nam">mixins</span> <span class="key">import</span> <span class="nam">CreateModelMixin</span><span class="op">,</span> <span class="nam">RetrieveModelMixin</span><span class="op">,</span> <span class="nam">UpdateModelMixin</span><span class="op">,</span> <span class="nam">DestroyModelMixin</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t5" class="run"><span class="n"><a href="#t5">5</a></span><span class="t"><span class="key">from</span> <span class="nam">rest_framework</span><span class="op">.</span><span class="nam">request</span> <span class="key">import</span> <span class="nam">Request</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t6" class="pln"><span class="n"><a href="#t6">6</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t7" class="pln"><span class="n"><a href="#t7">7</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t8" class="run"><span class="n"><a href="#t8">8</a></span><span class="t"><span class="key">class</span> <span class="nam">BaseViewSet</span><span class="op">(</span><span class="nam">ViewSet</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t9" class="run"><span class="n"><a href="#t9">9</a></span><span class="t">    <span class="nam">action_permissions</span> <span class="op">=</span> <span class="op">{</span><span class="op">}</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t10" class="run"><span class="n"><a href="#t10">10</a></span><span class="t">    <span class="nam">request</span><span class="op">:</span> <span class="nam">Request</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t11" class="pln"><span class="n"><a href="#t11">11</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t12" class="pln"><span class="n"><a href="#t12">12</a></span><span class="t">    <span class="com"># def check_permissions(self, request):</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t13" class="pln"><span class="n"><a href="#t13">13</a></span><span class="t">    <span class="com">#     """</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t14" class="pln"><span class="n"><a href="#t14">14</a></span><span class="t">    <span class="com">#     Check if the request should be permitted.</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t15" class="pln"><span class="n"><a href="#t15">15</a></span><span class="t">    <span class="com">#     Raises an appropriate exception if the request is not permitted.</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t16" class="pln"><span class="n"><a href="#t16">16</a></span><span class="t">    <span class="com">#     """</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t17" class="pln"><span class="n"><a href="#t17">17</a></span><span class="t">    <span class="com">#     has_permission = False</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t18" class="pln"><span class="n"><a href="#t18">18</a></span><span class="t">    <span class="com">#     last_bad_permission = None</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t19" class="pln"><span class="n"><a href="#t19">19</a></span><span class="t">    <span class="com">#     for permission in self.get_permissions():</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t20" class="pln"><span class="n"><a href="#t20">20</a></span><span class="t">    <span class="com">#         if permission.has_permission(request, self):</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t21" class="pln"><span class="n"><a href="#t21">21</a></span><span class="t">    <span class="com">#             has_permission = True</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t22" class="pln"><span class="n"><a href="#t22">22</a></span><span class="t">    <span class="com">#             break</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t23" class="pln"><span class="n"><a href="#t23">23</a></span><span class="t">    <span class="com">#         else:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t24" class="pln"><span class="n"><a href="#t24">24</a></span><span class="t">    <span class="com">#             last_bad_permission = permission</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t25" class="pln"><span class="n"><a href="#t25">25</a></span><span class="t">    <span class="com">#     if not has_permission:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t26" class="pln"><span class="n"><a href="#t26">26</a></span><span class="t">    <span class="com">#         self.permission_denied(</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t27" class="pln"><span class="n"><a href="#t27">27</a></span><span class="t">    <span class="com">#             request,</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t28" class="pln"><span class="n"><a href="#t28">28</a></span><span class="t">    <span class="com">#             message=getattr(last_bad_permission, 'message', None),</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t29" class="pln"><span class="n"><a href="#t29">29</a></span><span class="t">    <span class="com">#             code=getattr(last_bad_permission, 'code', None)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t30" class="pln"><span class="n"><a href="#t30">30</a></span><span class="t">    <span class="com">#         )</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t31" class="pln"><span class="n"><a href="#t31">31</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t32" class="run"><span class="n"><a href="#t32">32</a></span><span class="t">    <span class="key">def</span> <span class="nam">get_permissions</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t33" class="pln"><span class="n"><a href="#t33">33</a></span><span class="t">        <span class="str">"""</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t34" class="pln"><span class="n"><a href="#t34">34</a></span><span class="t"><span class="str">        &#21033;&#29992;ViewSet&#30340;self.action&#23646;&#24615;&#21487;&#20197;&#24471;&#30693;&#24403;&#21069;&#35831;&#27714;&#35302;&#21457;&#21738;&#20010;action&#36827;&#34892;&#22788;&#29702;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t35" class="pln"><span class="n"><a href="#t35">35</a></span><span class="t"><span class="str">        &#30001;&#27492;&#21487;&#20197;&#38024;&#23545;&#19981;&#21516;&#30340;action&#35774;&#32622;&#19981;&#21516;&#30340;&#26435;&#38480;&#31867;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t36" class="pln"><span class="n"><a href="#t36">36</a></span><span class="t"><span class="str">        Superuser&#24212;&#20855;&#26377;API&#25152;&#26377;&#26435;&#38480;&#65292;&#22240;&#27492;&#22312;&#22522;&#31867;&#36820;&#22238;&#30340;&#26435;&#38480;&#31867;&#20013;&#27880;&#20837;IsSuperuser&#65292;&#23545;Superuser&#26080;&#26465;&#20214;&#25918;&#34892;&#12290;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t37" class="pln"><span class="n"><a href="#t37">37</a></span><span class="t"><span class="str">        :return:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t38" class="pln"><span class="n"><a href="#t38">38</a></span><span class="t"><span class="str">        """</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t39" class="run"><span class="n"><a href="#t39">39</a></span><span class="t">        <span class="nam">cur_action_perms</span> <span class="op">=</span> <span class="nam">self</span><span class="op">.</span><span class="nam">action_permissions</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="nam">self</span><span class="op">.</span><span class="nam">action</span><span class="op">,</span> <span class="key">None</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t40" class="run"><span class="n"><a href="#t40">40</a></span><span class="t">        <span class="nam">base_list</span> <span class="op">=</span> <span class="nam">super</span><span class="op">(</span><span class="nam">BaseViewSet</span><span class="op">,</span> <span class="nam">self</span><span class="op">)</span><span class="op">.</span><span class="nam">get_permissions</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t41" class="run"><span class="n"><a href="#t41">41</a></span><span class="t">        <span class="key">if</span> <span class="nam">cur_action_perms</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t42" class="run"><span class="n"><a href="#t42">42</a></span><span class="t">            <span class="key">return</span> <span class="op">[</span><span class="nam">permission</span><span class="op">(</span><span class="op">)</span> <span class="key">for</span> <span class="nam">permission</span> <span class="key">in</span> <span class="nam">cur_action_perms</span><span class="op">]</span> <span class="op">+</span> <span class="nam">base_list</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t43" class="pln"><span class="n"><a href="#t43">43</a></span><span class="t">        <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t44" class="run"><span class="n"><a href="#t44">44</a></span><span class="t">            <span class="key">return</span> <span class="nam">base_list</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t45" class="pln"><span class="n"><a href="#t45">45</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t46" class="pln"><span class="n"><a href="#t46">46</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t47" class="run"><span class="n"><a href="#t47">47</a></span><span class="t"><span class="key">class</span> <span class="nam">BaseGenericViewSet</span><span class="op">(</span><span class="nam">BaseViewSet</span><span class="op">,</span> <span class="nam">GenericViewSet</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t48" class="run"><span class="n"><a href="#t48">48</a></span><span class="t">    <span class="nam">action_serializer_classes</span> <span class="op">=</span> <span class="op">{</span><span class="op">}</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t49" class="pln"><span class="n"><a href="#t49">49</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t50" class="run"><span class="n"><a href="#t50">50</a></span><span class="t">    <span class="key">def</span> <span class="nam">get_serializer_class</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t51" class="pln"><span class="n"><a href="#t51">51</a></span><span class="t">        <span class="str">"""</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t52" class="pln"><span class="n"><a href="#t52">52</a></span><span class="t"><span class="str">        &#21033;&#29992;ViewSet&#30340;self.action&#23646;&#24615;&#21487;&#20197;&#24471;&#30693;&#24403;&#21069;&#35831;&#27714;&#35302;&#21457;&#21738;&#20010;action&#36827;&#34892;&#22788;&#29702;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t53" class="pln"><span class="n"><a href="#t53">53</a></span><span class="t"><span class="str">        &#30001;&#27492;&#21487;&#20197;&#38024;&#23545;&#19981;&#21516;&#30340;action&#35774;&#32622;&#19981;&#21516;&#30340;serializer&#12290;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t54" class="pln"><span class="n"><a href="#t54">54</a></span><span class="t"><span class="str">        :return:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t55" class="pln"><span class="n"><a href="#t55">55</a></span><span class="t"><span class="str">        """</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t56" class="run"><span class="n"><a href="#t56">56</a></span><span class="t">        <span class="nam">cur_action_class</span> <span class="op">=</span> <span class="nam">self</span><span class="op">.</span><span class="nam">action_serializer_classes</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="nam">self</span><span class="op">.</span><span class="nam">action</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t57" class="run"><span class="n"><a href="#t57">57</a></span><span class="t">        <span class="key">return</span> <span class="nam">cur_action_class</span> <span class="key">if</span> <span class="nam">cur_action_class</span> <span class="key">else</span> <span class="nam">super</span><span class="op">(</span><span class="op">)</span><span class="op">.</span><span class="nam">get_serializer_class</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t58" class="pln"><span class="n"><a href="#t58">58</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t59" class="pln"><span class="n"><a href="#t59">59</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t60" class="run"><span class="n"><a href="#t60">60</a></span><span class="t"><span class="key">class</span> <span class="nam">BaseModelViewSet</span><span class="op">(</span><span class="nam">BaseGenericViewSet</span><span class="op">,</span> <span class="nam">ModelViewSet</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t61" class="run"><span class="n"><a href="#t61">61</a></span><span class="t">    <span class="key">pass</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t62" class="pln"><span class="n"><a href="#t62">62</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t63" class="pln"><span class="n"><a href="#t63">63</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t64" class="run"><span class="n"><a href="#t64">64</a></span><span class="t"><span class="key">class</span> <span class="nam">BaseSingletonViewSet</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t65" class="pln"><span class="n"><a href="#t65">65</a></span><span class="t">    <span class="nam">CreateModelMixin</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t66" class="pln"><span class="n"><a href="#t66">66</a></span><span class="t">    <span class="nam">RetrieveModelMixin</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t67" class="pln"><span class="n"><a href="#t67">67</a></span><span class="t">    <span class="nam">UpdateModelMixin</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t68" class="pln"><span class="n"><a href="#t68">68</a></span><span class="t">    <span class="nam">DestroyModelMixin</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t69" class="pln"><span class="n"><a href="#t69">69</a></span><span class="t">    <span class="nam">BaseGenericViewSet</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t70" class="pln"><span class="n"><a href="#t70">70</a></span><span class="t"><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t71" class="pln"><span class="n"><a href="#t71">71</a></span><span class="t">    <span class="str">"""</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t72" class="pln"><span class="n"><a href="#t72">72</a></span><span class="t"><span class="str">    &#38024;&#23545;&#19968;&#20010;API&#25509;&#21475;&#21482;&#38656;&#35201;&#32500;&#25252;&#21333;&#19968;&#25968;&#25454;&#30340;&#38656;&#27714;&#30340;ViewSet&#12290;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t73" class="pln"><span class="n"><a href="#t73">73</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t74" class="pln"><span class="n"><a href="#t74">74</a></span><span class="t"><span class="str">    &#21333;&#19968;&#25968;&#25454;&#22312;RESTful&#23454;&#36341;&#20013;&#20063;&#26159;&#24456;&#24120;&#35265;&#30340;&#65292;&#24182;&#38750;&#25152;&#26377;&#30340;RESTful API&#23545;&#20110;GET /endpoint&#36825;&#26679;&#30340;&#35831;&#27714;&#37117;&#38656;&#35201;&#36820;&#22238;&#22810;&#26465;&#25968;&#25454;&#30340;&#21015;&#34920;&#65292;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t75" class="pln"><span class="n"><a href="#t75">75</a></span><span class="t"><span class="str">    &#26576;&#20123;&#24773;&#20917;&#19979;&#19968;&#20010;API&#25509;&#21475;&#21482;&#38656;&#35201;&#32500;&#25252;&#29305;&#23450;&#30340;&#21333;&#19968;&#25968;&#25454;&#65292;&#20363;&#22914;&#23545;&#20110;&#19968;&#20010;&#29305;&#23450;&#30340;&#29992;&#25143;&#65292;&#20854;&#29992;&#25143;&#36164;&#26009;&#26159;&#21807;&#19968;&#30340;&#65292;&#19981;&#23384;&#22312;&#36820;&#22238;&#25968;&#25454;&#21015;&#34920;&#30340;&#38656;&#27714;&#65292;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t76" class="pln"><span class="n"><a href="#t76">76</a></span><span class="t"><span class="str">    &#20063;&#19981;&#38656;&#35201;/endpoint/{id}&#36825;&#26679;&#30340;&#27169;&#24335;&#26469;&#35775;&#38382;&#21333;&#20010;&#25968;&#25454;&#65292;&#31867;&#20284;&#22320;&#65292;&#23545;&#20110;&#29992;&#25143;&#36164;&#26009;&#30340;&#26356;&#26032;&#12289;&#21024;&#38500;&#20063;&#24212;&#35813;&#38480;&#21046;&#22312;&#20165;&#22312;&#35813;&#21333;&#19968;&#25968;&#25454;&#23545;&#35937;&#19978;&#25191;&#34892;&#12290;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t77" class="pln"><span class="n"><a href="#t77">77</a></span><span class="t"><span class="str">    &#23545;&#20110;&#36825;&#26679;&#30340;&#34892;&#20026;&#23450;&#20041;&#65292;&#24120;&#35268;RESTful&#30340;URL&#32467;&#26500;&#26174;&#24471;&#27604;&#36739;&#22810;&#20313;&#65292;&#22240;&#27492;&#25105;&#20204;&#20026;&#36825;&#26679;&#30340;&#25968;&#25454;&#38656;&#27714;&#19987;&#38376;&#23450;&#20041;&#21333;&#20363;ViewSet(SingletonViewSet)&#12290;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t78" class="pln"><span class="n"><a href="#t78">78</a></span><span class="t"><span class="str">    &#24182;&#19988;&#25105;&#20204;&#32422;&#23450;&#65292;&#21333;&#20363;ViewSet&#30340;URL prefix&#20351;&#29992;/cur{name}&#30340;&#24418;&#24335;&#65292;cur&#34920;&#31034;current.</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t79" class="pln"><span class="n"><a href="#t79">79</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t80" class="pln"><span class="n"><a href="#t80">80</a></span><span class="t"><span class="str">    &#19981;&#22952;&#20551;&#35774;&#35775;&#38382;&#24403;&#21069;&#29992;&#25143;&#36164;&#26009;&#30340;&#25509;&#21475;&#20026;/curprofile&#65292;&#37027;&#20040;&#35813;&#25509;&#21475;&#30340;&#34892;&#20026;&#22914;&#19979;&#65306;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t81" class="pln"><span class="n"><a href="#t81">81</a></span><span class="t"><span class="str">    GET /curprofile &#35843;&#29992;retrieve action&#65292;&#33509;&#23384;&#22312;&#28385;&#36275;&#26465;&#20214;&#30340;&#21333;&#20363;&#25968;&#25454;&#21017;&#36820;&#22238;&#65292;&#21542;&#21017;&#36820;&#22238;404</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t82" class="pln"><span class="n"><a href="#t82">82</a></span><span class="t"><span class="str">    POST /curprofile &#35843;&#29992;create_or_update action&#65292;&#33509;&#19981;&#23384;&#22312;&#28385;&#36275;&#26465;&#20214;&#30340;&#21333;&#20363;&#25968;&#25454;&#21017;&#21019;&#24314;&#65292;&#21542;&#21017;&#20840;&#37327;&#26356;&#26032;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t83" class="pln"><span class="n"><a href="#t83">83</a></span><span class="t"><span class="str">    PUT /curprofile &#35843;&#29992;update action&#65292;&#23545;&#28385;&#36275;&#26465;&#20214;&#30340;&#21333;&#20363;&#25968;&#25454;&#36827;&#34892;&#20840;&#37327;&#26356;&#26032;&#65292;&#33509;&#19981;&#23384;&#22312;&#21017;&#36820;&#22238;404</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t84" class="pln"><span class="n"><a href="#t84">84</a></span><span class="t"><span class="str">    PATCH /curprofile &#35843;&#29992;partial_update action&#65292;&#36827;&#34892;&#22686;&#37327;&#26356;&#26032;&#65292;&#33509;&#19981;&#23384;&#22312;&#21017;&#36820;&#22238;404</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t85" class="pln"><span class="n"><a href="#t85">85</a></span><span class="t"><span class="str">    DELETE /curprofile &#35843;&#29992;destroy action&#65292;&#33509;&#23384;&#22312;&#21333;&#20363;&#25968;&#25454;&#65292;&#21017;&#36827;&#34892;&#21024;&#38500;&#12290;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t86" class="pln"><span class="n"><a href="#t86">86</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t87" class="pln"><span class="n"><a href="#t87">87</a></span><span class="t"><span class="str">    &#38656;&#35201;&#20351;&#29992;projectpolaris.rest_framework.routers.SingletonViewRouter&#26469;&#29983;&#25104;&#19978;&#36848;URL&#32467;&#26500;&#12290;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t88" class="pln"><span class="n"><a href="#t88">88</a></span><span class="t"><span class="str">    """</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t89" class="pln"><span class="n"><a href="#t89">89</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t90" class="run"><span class="n"><a href="#t90">90</a></span><span class="t">    <span class="key">def</span> <span class="nam">perform_get_object</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t91" class="pln"><span class="n"><a href="#t91">91</a></span><span class="t">        <span class="str">"""</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t92" class="pln"><span class="n"><a href="#t92">92</a></span><span class="t"><span class="str">        &#23454;&#38469;&#25191;&#34892;&#33719;&#21462;&#29305;&#23450;ViewSet&#25152;&#38656;&#30340;&#21333;&#20363;&#25968;&#25454;&#30340;&#26041;&#27861;&#65292;&#23376;&#31867;&#24517;&#39035;&#23454;&#29616;&#65292;&#22914;&#33719;&#21462;&#24403;&#21069;&#29992;&#25143;&#30340;&#36164;&#26009;&#12289;&#24403;&#21069;&#26102;&#38388;&#29677;&#27425;&#31561;&#12290;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t93" class="pln"><span class="n"><a href="#t93">93</a></span><span class="t"><span class="str">        &#35831;&#21247;&#22312;&#27492;&#26041;&#27861;&#20013;&#20351;&#29992;get_object_or_404&#36741;&#21161;&#20989;&#25968;&#12290;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t94" class="pln"><span class="n"><a href="#t94">94</a></span><span class="t"><span class="str">        :return: &#28385;&#36275;&#29305;&#23450;ViewSet&#25968;&#25454;&#38656;&#27714;&#30340;&#21333;&#20363;&#25968;&#25454;&#65292;&#19981;&#23384;&#22312;&#21017;&#36820;&#22238;None</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t95" class="pln"><span class="n"><a href="#t95">95</a></span><span class="t"><span class="str">        """</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t96" class="mis show_mis"><span class="n"><a href="#t96">96</a></span><span class="t">        <span class="key">raise</span> <span class="nam">NotImplementedError</span><span class="op">(</span><span class="str">'You must implement perform_get_object to return singleton data!'</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t97" class="pln"><span class="n"><a href="#t97">97</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t98" class="run"><span class="n"><a href="#t98">98</a></span><span class="t">    <span class="key">def</span> <span class="nam">get_object</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t99" class="pln"><span class="n"><a href="#t99">99</a></span><span class="t">        <span class="str">"""</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t100" class="pln"><span class="n"><a href="#t100">100</a></span><span class="t"><span class="str">        &#35843;&#29992;perform_get_object&#26041;&#27861;&#33719;&#21462;&#21333;&#20363;&#25968;&#25454;&#65292;&#33509;&#19981;&#23384;&#22312;&#21017;&#25243;&#20986;404</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t101" class="pln"><span class="n"><a href="#t101">101</a></span><span class="t"><span class="str">        :return:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t102" class="pln"><span class="n"><a href="#t102">102</a></span><span class="t"><span class="str">        """</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t103" class="run"><span class="n"><a href="#t103">103</a></span><span class="t">        <span class="nam">obj</span> <span class="op">=</span> <span class="nam">self</span><span class="op">.</span><span class="nam">perform_get_object</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t104" class="run"><span class="n"><a href="#t104">104</a></span><span class="t">        <span class="key">if</span> <span class="key">not</span> <span class="nam">obj</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t105" class="run"><span class="n"><a href="#t105">105</a></span><span class="t">            <span class="key">raise</span> <span class="nam">Http404</span><span class="op">(</span><span class="str">"Object does not exist!"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t106" class="pln"><span class="n"><a href="#t106">106</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t107" class="run"><span class="n"><a href="#t107">107</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">check_object_permissions</span><span class="op">(</span><span class="nam">self</span><span class="op">.</span><span class="nam">request</span><span class="op">,</span> <span class="nam">obj</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t108" class="run"><span class="n"><a href="#t108">108</a></span><span class="t">        <span class="key">return</span> <span class="nam">obj</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t109" class="pln"><span class="n"><a href="#t109">109</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t110" class="run"><span class="n"><a href="#t110">110</a></span><span class="t">    <span class="key">def</span> <span class="nam">create_or_update</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">request</span><span class="op">:</span> <span class="nam">Request</span><span class="op">,</span> <span class="op">*</span><span class="nam">args</span><span class="op">,</span> <span class="op">**</span><span class="nam">kwargs</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t111" class="pln"><span class="n"><a href="#t111">111</a></span><span class="t">        <span class="str">"""</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t112" class="pln"><span class="n"><a href="#t112">112</a></span><span class="t"><span class="str">        &#20808;&#35843;&#29992;get_object&#65292;&#33509;&#25243;&#20986;404&#21017;&#25429;&#33719;&#24182;&#35843;&#29992;create&#65292;&#21542;&#21017;&#35843;&#29992;update</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t113" class="pln"><span class="n"><a href="#t113">113</a></span><span class="t"><span class="str">        &#21487;&#33021;&#23384;&#22312;&#37325;&#22797;&#25968;&#25454;&#24211;&#26597;&#35810;&#65288;update&#65289;&#65292;&#20294;&#24182;&#19981;&#23384;&#22312;&#36807;&#20110;&#20005;&#37325;&#30340;&#24615;&#33021;&#38382;&#39064;&#12290;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t114" class="pln"><span class="n"><a href="#t114">114</a></span><span class="t"><span class="str">        :param request:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t115" class="pln"><span class="n"><a href="#t115">115</a></span><span class="t"><span class="str">        :return:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t116" class="pln"><span class="n"><a href="#t116">116</a></span><span class="t"><span class="str">        """</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t117" class="run"><span class="n"><a href="#t117">117</a></span><span class="t">        <span class="key">try</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t118" class="run"><span class="n"><a href="#t118">118</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">get_object</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t119" class="run"><span class="n"><a href="#t119">119</a></span><span class="t">        <span class="key">except</span> <span class="nam">Http404</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t120" class="pln"><span class="n"><a href="#t120">120</a></span><span class="t">            <span class="com"># Hack, to invoke serializer for create</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t121" class="run"><span class="n"><a href="#t121">121</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">action</span> <span class="op">=</span> <span class="str">'create'</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t122" class="run"><span class="n"><a href="#t122">122</a></span><span class="t">            <span class="key">return</span> <span class="nam">self</span><span class="op">.</span><span class="nam">create</span><span class="op">(</span><span class="nam">request</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t123" class="pln"><span class="n"><a href="#t123">123</a></span><span class="t">        <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t124" class="mis show_mis"><span class="n"><a href="#t124">124</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">action</span> <span class="op">=</span> <span class="str">'update'</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t125" class="mis show_mis"><span class="n"><a href="#t125">125</a></span><span class="t">            <span class="key">return</span> <span class="nam">self</span><span class="op">.</span><span class="nam">update</span><span class="op">(</span><span class="nam">request</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+</div>
+<div id="footer">
+    <div class="content">
+        <p>
+            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.3</a>,
+            created at 2021-01-06 16:13 +0800
+        </p>
+    </div>
+</div>
+</body>
+</html>

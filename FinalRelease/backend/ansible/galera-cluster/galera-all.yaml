@@ -1,0 +1,3 @@
+- import_playbook: playbooks/package-init.yaml
+- import_playbook: playbooks/configuration.yaml
+- import_playbook: playbooks/start-cluster.yaml

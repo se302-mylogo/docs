@@ -1,0 +1,1 @@
+kubeadm join 172.26.13.108:8443 --token m3lftc.k46m7a0zwi5mltq4     --discovery-token-ca-cert-hash sha256:bba68b5c3cb0083cefe96645318481bd85a90ba9d34d660829354db52df93b72 

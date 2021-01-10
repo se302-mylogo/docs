@@ -1,0 +1,21 @@
+- hosts: workers
+  become: true
+  tasks:
+    - name: Stop mysql
+      service:
+        name: mysql
+        state: stopped
+
+- hosts: workers[0]
+  become: true
+  tasks:
+    - name: Start new galera cluster
+      command: galera_new_cluster
+
+- hosts: workers:!workers[0]
+  become: true
+  tasks:
+    - name: Start mysql and join cluster
+      service:
+        name: mysql
+        state: started

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redirector-filebeat-cm
+data:
+  filebeat.yml: |
+    cloud.id: "url-shortener:YXNpYS1lYXN0MS5nY3AuZWxhc3RpYy1jbG91ZC5jb20kNjlmMThlOWJhZjliNGI2MTk5MmM2MDRkNjNhMWVjZmIkZDk2YzI0N2UyYjlhNGQyYWIwOGNjZTc0ODlkZTA1YTE="
+    cloud.auth: "elastic:Jt0T4oY0jq0bzj1Vu1wlwkh0"
+    filebeat.inputs:
+    - type: log
+      paths:
+      - '/var/log/redirector/gin.log'
+      multiline:
+        pattern: '^.*?="\b\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}'
+        match: after
+        negate: true
+    output.elasticsearch:
+      index: "redirector-logs"
+      pipeline: "redirector-logs-pipeline"
+    setup:
+      template.enabled: false
+      ilm.enabled: false

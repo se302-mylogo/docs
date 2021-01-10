@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kibana-proxy-cm
+data:
+  nginx.conf: |
+    user  nginx;
+    worker_processes  1;
+
+    error_log  /var/log/nginx/error.log warn;
+    pid        /var/run/nginx.pid;
+
+    events {
+        worker_connections  2048;
+        use epoll;
+    }
+
+    http {
+        include       /etc/nginx/mime.types;
+        default_type  application/octet-stream;
+        sendfile        on;
+        tcp_nopush         on;
+        tcp_nodelay        on;
+        keepalive_timeout  65;
+
+        server {
+            listen 80;
+
+            location / {
+                 proxy_set_header  X-Found-Cluster d96c247e2b9a4d2ab08cce7489de05a1;
+                 proxy_set_header  Host $host;
+                 proxy_set_header  X-Real-IP $remote_addr;
+                 proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+                 proxy_set_header  Authorization "Basic Zm91cnN0cmluZzpBUml6Z1pMbm9KSk40M3dDVXh2eGs1ZERwV1pGTmVvN09LMXhneEZDSzdUendTck9JanZTMGJvbzBQcXhpQ2Y0"; # base64-encoded username:password to pass in header
+                 proxy_pass  https://d96c247e2b9a4d2ab08cce7489de05a1.asia-east1.gcp.elastic-cloud.com:9243/; # actual kibana URL
+            }
+        }
+    }
+
+
